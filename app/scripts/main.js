@@ -1,98 +1,36 @@
 (function (document, Tone) { 'use strict';
 
-    //create one of Tone's built-in synthesizers
-    var synth = new Tone.MonoSynth();
-    var synth2 = new Tone.MonoSynth();
-    var synth3 = new Tone.MonoSynth();
-
     var elem = {
         body : document.body,
         toggle : document.getElementById('btn_playToggle'),
-        playA : document.getElementById('btn_playA'),
-        playB : document.getElementById('btn_playB'),
-        playC : document.getElementById('btn_playC'),
-        playD : document.getElementById('btn_playD')
+        btnA : document.getElementById('btn_playA'),
+        btnB : document.getElementById('btn_playB'),
+        btnC : document.getElementById('btn_playC'),
+        btnD : document.getElementById('btn_playD')
     };
 
-    var bgOn = false;
-    var play = false;
-
-    var toggleBackground = function () {
-        bgOn = !bgOn;
-        if (bgOn) {
-            elem.body.style.backgroundColor = '#ddd';
-        } else {
-            elem.body.style.backgroundColor = 'white';
-        }
-    };
-
-    var togglePlayback = function () {
-        play = !play;
-        if (play) {
-            Tone.Transport.start();
-        } else {
-            Tone.Transport.stop();
-        }
-        console.log(play);
-    };
-
-    elem.toggle.addEventListener('click', function () {
-        togglePlayback();
-    });
-    elem.playA.addEventListener('mousedown', function () {
-        synth.triggerAttack('C2');
-    });
-    elem.playB.addEventListener('mousedown', function () {
-        synth.triggerAttack('E2');
-    });
-    elem.playC.addEventListener('mousedown', function () {
-        synth.triggerAttack('G2');
-    });
-    elem.playD.addEventListener('mousedown', function () {
-        synth.triggerAttack('C3');
-    });
-
-
-    document.addEventListener('mouseup', function () {
-        synth.triggerRelease();
-    });
-
-
-
-    // SINGLE REPEATING NOTE
+    // SYNTHS
     // ----------------------------------------------------------------------------
-
-    // connect the synth to the master output channel
-    synth.toMaster();
+    //create one of Tone's built-in synthesizers
+    var synth1 = new Tone.MonoSynth();
+    var synth2 = new Tone.MonoSynth();
+    var synth3 = new Tone.MonoSynth();
+    var synth4 = new Tone.MonoSynth();
+    synth1.toMaster();
     synth2.toMaster();
     synth3.toMaster();
+    synth4.toMaster();
 
-    //create a callback which is invoked every quarter note
-    Tone.Transport.setInterval(function(time){
-        synth.triggerAttackRelease('C2', '64n', time);
-        synth2.triggerAttackRelease('E2', '64n', time);
-        synth3.triggerAttackRelease('G2', '64n', time);
-        toggleBackground();
-    }, '4n');
-
-    //start the transport
-    //Tone.Transport.start();
-
-
-
-    // OSCILLATOR
+    // OSCILLATORS
     // ----------------------------------------------------------------------------
-
-    /*
-    var osc = new Tone.Oscillator(110, "sine");
-    //connect it to the master output
-    osc.toMaster();
-    osc.start();
-
-    */
-
-
-
+    var osc1 = new Tone.Oscillator(30, "triangle");
+    var osc2 = new Tone.Oscillator(32, "triangle");
+    var osc3 = new Tone.Oscillator(34, "triangle");
+    var osc4 = new Tone.Oscillator(36, "triangle");
+    osc1.toMaster();
+    osc2.toMaster();
+    osc3.toMaster();
+    osc4.toMaster();
 
 /*    
     // ArpeggiatorEffect
@@ -123,4 +61,90 @@
     //Tone.Transport.start();
     
 */
+
+
+
+    var playback = false;
+    var synth1Active = false;
+    var synth2Active = false;
+    var synth3Active = false;
+    var synth4Active = false;
+
+    var togglePlayback = function () {
+        playback = !playback;
+        if (playback) {
+            osc1.start();
+            osc2.start();
+            osc3.start();
+            osc4.start();
+        } else {
+            osc1.stop();
+            osc2.stop();
+            osc3.stop();
+            osc4.stop();
+        }
+    };
+
+    var playA = function () {
+        if (synth1Active) return;
+        synth1Active = true;
+        synth1.triggerAttack('C2');
+    };
+    var playB = function () {
+        if (synth2Active) return;
+        synth2Active = true;
+        synth2.triggerAttack('E2');
+    };
+    var playC = function () {
+        if (synth3Active) return;
+        synth3Active = true;
+        synth3.triggerAttack('G2');
+    };
+    var playD = function () {
+        if (synth4Active) return;
+        synth4Active = true;
+        synth4.triggerAttack('C3');
+    };
+    var stopPlay = function () {
+        if (synth1Active) {
+            synth1.triggerRelease();
+            synth1Active = false;
+        }
+        if (synth2Active) {
+            synth2.triggerRelease();
+            synth2Active = false;
+        }
+        if (synth3Active) {
+            synth3.triggerRelease();
+            synth3Active = false;
+        }
+        if (synth4Active) {
+            synth4.triggerRelease();
+            synth4Active = false;
+        }
+    };
+
+    /* DOM BINDING */
+    elem.toggle.addEventListener('click', function () {
+        togglePlayback();
+    });
+    elem.btnA.addEventListener('mousedown', playA);
+    elem.btnB.addEventListener('mousedown', playB);
+    elem.btnC.addEventListener('mousedown', playC);
+    elem.btnD.addEventListener('mousedown', playD);
+    document.addEventListener('mouseup', stopPlay);
+
+
+    Mousetrap.bind('q', playA, 'keypress');
+    Mousetrap.bind('w', playB, 'keypress');
+    Mousetrap.bind('e', playC, 'keypress');
+    Mousetrap.bind('r', playD, 'keypress');
+    Mousetrap.bind(['q', 'w', 'e', 'r'], stopPlay, 'keyup');
+
+
+    window.osc1 = osc1;
+    window.osc2 = osc2;
+    window.osc3 = osc3;
+    window.osc4 = osc4;
+
 })(document, Tone);
