@@ -33,7 +33,7 @@
       <div class="jumbotron">
         <h1>Click to begin</h1>
         <p class="lead">Health and Beauty, HTML5 style</p>
-        <a id="btn_playToggle" class="btn btn-success" href="#">Play <span class="glyphicon glyphicon-music"></span></a>
+        
         <a id="btn_playA" class="btn btn-primary" href="#">C2</a>
         <a id="btn_playB" class="btn btn-primary" href="#">E2</a>
         <a id="btn_playC" class="btn btn-primary" href="#">G2</a>
@@ -57,7 +57,7 @@
           <tbody>
             <tr>
               <th scope="row">1</th>
-              <td><input type="number" class="form-control" placeholder="frequency"></td>
+              <td><input id="osc1_freq" type="number" class="form-control" placeholder="frequency"></td>
               <td>
                 <label class="radio-inline">
                   <input type="radio" name="inlineRadioOptions1" id="inlineRadio1" value="sine" checked> sine
@@ -74,11 +74,11 @@
               </td>
               <td>
                 <div class="btn-group" data-toggle="buttons">
-                  <label class="btn btn-primary active">
-                    <input type="radio" name="options" id="option1" autocomplete="off" checked> on
-                  </label>
                   <label class="btn btn-primary">
-                    <input type="radio" name="options" id="option2" autocomplete="off"> off
+                    <input type="radio" name="osc1_on" id="option1" autocomplete="off" value="on"> on
+                  </label>
+                  <label class="btn btn-primary active">
+                    <input type="radio" name="osc1_on" id="option2" autocomplete="off" value="off" checked> off
                   </label>
                 </div>
               </td>
@@ -86,7 +86,7 @@
 
             <tr>
               <th scope="row">2</th>
-              <td><input type="number" class="form-control" placeholder="frequency"></td>
+              <td><input id="osc2_freq" type="number" class="form-control" placeholder="frequency"></td>
               <td>
                 <label class="radio-inline">
                   <input type="radio" name="inlineRadioOptions2" id="inlineRadio1" value="sine" checked> sine
@@ -103,11 +103,11 @@
               </td>
               <td>
                 <div class="btn-group" data-toggle="buttons">
-                  <label class="btn btn-primary active">
-                    <input type="radio" name="options" id="option1" autocomplete="off" checked> on
-                  </label>
                   <label class="btn btn-primary">
-                    <input type="radio" name="options" id="option2" autocomplete="off"> off
+                    <input type="radio" name="osc2_on" id="option1" autocomplete="off" value="on"> on
+                  </label>
+                  <label class="btn btn-primary active">
+                    <input type="radio" name="osc2_on" id="option2" autocomplete="off" value="off" checked> off
                   </label>
                 </div>
               </td>
@@ -115,7 +115,7 @@
 
             <tr>
               <th scope="row">3</th>
-              <td><input type="number" class="form-control" placeholder="frequency"></td>
+              <td><input id="osc3_freq" type="number" class="form-control" placeholder="frequency"></td>
               <td>
                 <label class="radio-inline">
                   <input type="radio" name="inlineRadioOptions3" id="inlineRadio1" value="sine" checked> sine
@@ -132,11 +132,11 @@
               </td>
               <td>
                 <div class="btn-group" data-toggle="buttons">
-                  <label class="btn btn-primary active">
-                    <input type="radio" name="options" id="option1" autocomplete="off" checked> on
-                  </label>
                   <label class="btn btn-primary">
-                    <input type="radio" name="options" id="option2" autocomplete="off"> off
+                    <input type="radio" name="osc3_on" id="option1" autocomplete="off" value="on"> on
+                  </label>
+                  <label class="btn btn-primary active">
+                    <input type="radio" name="osc3_on" id="option2" autocomplete="off" value="off" checked> off
                   </label>
                 </div>
               </td>
@@ -144,7 +144,7 @@
 
             <tr>
               <th scope="row">4</th>
-              <td><input type="number" class="form-control" placeholder="frequency"></td>
+              <td><input id="osc4_freq" type="number" class="form-control" placeholder="frequency"></td>
               <td>
                 <label class="radio-inline">
                   <input type="radio" name="inlineRadioOptions4" id="inlineRadio1" value="sine" checked> sine
@@ -161,11 +161,11 @@
               </td>
               <td>
                 <div class="btn-group" data-toggle="buttons">
-                  <label class="btn btn-primary active">
-                    <input type="radio" name="options" id="option1" autocomplete="off" checked> on
-                  </label>
                   <label class="btn btn-primary">
-                    <input type="radio" name="options" id="option2" autocomplete="off"> off
+                    <input type="radio" name="osc4_on" id="option1" autocomplete="off" value="on"> on
+                  </label>
+                  <label class="btn btn-primary active">
+                    <input type="radio" name="osc4_on" id="option2" autocomplete="off" value="off" checked> off
                   </label>
                 </div>
               </td>
@@ -191,9 +191,8 @@
     <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js"></script>
     <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js"></script>
     <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js"></script>
-
-    <script src="bower_components/tone/build/Tone.min.js"></script>
-    <script src="bower_components/mousetrap/mousetrap.min.js"></script>
+    <script src="bower_components/tone/build/Tone.js"></script>
+    <script src="bower_components/mousetrap/mousetrap.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
