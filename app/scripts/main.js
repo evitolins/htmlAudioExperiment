@@ -120,30 +120,30 @@
 
 
     elem.osc1Freq.addEventListener('change', function () {
-       osc1.setFrequency(this.value);
+       osc1.frequency.value = this.value;
     });
     elem.osc2Freq.addEventListener('change', function () {
-       osc2.setFrequency(this.value);
+       osc2.frequency.value = this.value;
     });
     elem.osc3Freq.addEventListener('change', function () {
-       osc3.setFrequency(this.value);
+       osc3.frequency.value = this.value;
     });
     elem.osc4Freq.addEventListener('change', function () {
-       osc4.setFrequency(this.value);
+       osc4.frequency.value = this.value;
     });
 
 
     $("input[name=inlineRadioOptions1]").change(function () {
-        osc1.setType(this.value);
+        osc1.type = this.value;
     });
     $("input[name=inlineRadioOptions2]").change(function () {
-        osc2.setType(this.value);
+        osc2.type = this.value;
     });
     $("input[name=inlineRadioOptions3]").change(function () {
-        osc3.setType(this.value);
+        osc3.type = this.value;
     });
     $("input[name=inlineRadioOptions4]").change(function () {
-        osc4.setType(this.value);
+        osc4.type = this.value;
     });
 
     $("input[name=osc1_on]").change(function () {
